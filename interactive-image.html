@@ -160,24 +160,21 @@
 <body>
     <div class="container">
         <h1>Anatomy of Code on Westlaw</h1>
-        <p class="subtitle">Click or hover over the red rectangles to view information about each annotated feature.</p>
-
         <div class="instructions">
             <h3>How to use:</h3>
-            <p>Click on any red rectangle to see detailed information about that section of the document.</p>
+            <p>Click or hover over the red rectangles to view information about each annotated feature.</p>
         </div>
 
         <div class="image-container" id="imageContainer">
             <img src="Anatomy of Code (WL).png" alt="Thomson Reuters Westlaw Legal Document">
             
-            <!-- Hotspot 1: Header Section -->
-            <div class="hotspot" style="left: 0%; top: 0%; width: 100%; height: 8%;" data-info="header">
-                <div class="popup" id="popup-header">
+            <!-- Hotspot 1: Notes of Decisions Section -->
+            <div class="hotspot" style="left: 0%; top: 0%; width: 100%; height: 8%;" data-info="NOD">
+                <div class="popup" id="popup-NOD">
                     <button class="popup-close" onclick="closePopup('header')">×</button>
-                    <div class="popup-title">Navigation Header</div>
+                    <div class="popup-title">Notes of Decisions</div>
                     <div class="popup-content">
-                        <strong>Thomson Reuters Westlaw Advantage</strong><br><br>
-                        This header contains the search interface with options to search all content, access state and federal laws, and use advanced search features.
+                        The Notes of Decisions is a curated list of cases that interpret the statute's language, organized by important sub-issues related to the statute.
                     </div>
                 </div>
             </div>
