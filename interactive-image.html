@@ -159,67 +159,142 @@
 </head>
 <body>
     <div class="container">
-        <h1>Interactive Image Map</h1>
-        <p class="subtitle">Click or hover over the red rectangles to view information</p>
+        <h1>Interactive Legal Document Map</h1>
+        <p class="subtitle">Click or hover over the red rectangles to view information about each section</p>
 
         <div class="instructions">
             <h3>How to use:</h3>
-            <p>Hover over or click the red rectangles on the image to view detailed information about that section.</p>
+            <p>Click on any red rectangle to see detailed information about that section of the document.</p>
         </div>
 
         <div class="image-container" id="imageContainer">
-            <img src="https://via.placeholder.com/800x1000/f0f0f0/999999?text=Paste+Your+Image+URL+Here" alt="Interactive Document">
+            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCADIAyADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlbaWmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/2Q==" alt="Interactive Legal Document">
             
-            <!-- Hotspot Examples - Modify coordinates and information as needed -->
-            <div class="hotspot" style="left: 5%; top: 2%; width: 90%; height: 8%;" data-info="header">
+            <!-- Hotspot 1: Header Section -->
+            <div class="hotspot" style="left: 0%; top: 0%; width: 100%; height: 8%;" data-info="header">
                 <div class="popup" id="popup-header">
                     <button class="popup-close" onclick="closePopup('header')">×</button>
-                    <div class="popup-title">Header Section</div>
+                    <div class="popup-title">Navigation Header</div>
                     <div class="popup-content">
-                        <strong>Thomson Reuters Westlaw Advantage</strong><br>
-                        This is the main navigation header containing the search bar and menu options for accessing legal databases and resources.
+                        <strong>Thomson Reuters Westlaw Advantage</strong><br><br>
+                        This header contains the search interface with options to search all content, access state and federal laws, and use advanced search features.
                     </div>
                 </div>
             </div>
 
-            <div class="hotspot" style="left: 5%; top: 12%; width: 90%; height: 15%;" data-info="title">
-                <div class="popup" id="popup-title">
-                    <button class="popup-close" onclick="closePopup('title')">×</button>
-                    <div class="popup-title">Document Title Section</div>
+            <!-- Hotspot 2: Document Meta Information -->
+            <div class="hotspot" style="left: 0%; top: 7%; width: 100%; height: 6%;" data-info="meta">
+                <div class="popup" id="popup-meta">
+                    <button class="popup-close" onclick="closePopup('meta')">×</button>
+                    <div class="popup-title">Document Reference</div>
                     <div class="popup-content">
                         <strong>§ 16. Breaking and entering at night</strong><br>
-                        M.A ST 266 § 16 - Massachusetts General Laws Annotated<br>
+                        M.A ST 266 § 16<br>
+                        Massachusetts General Laws Annotated<br>
                         Part IV. Crimes, Punishments and Proceedings in Criminal Cases (Ch. 263-280)
                     </div>
                 </div>
             </div>
 
-            <div class="hotspot" style="left: 5%; top: 35%; width: 90%; height: 25%;" data-info="content">
-                <div class="popup" id="popup-content">
-                    <button class="popup-close" onclick="closePopup('content')">×</button>
-                    <div class="popup-title">Legal Text Content</div>
+            <!-- Hotspot 3: Navigation Tabs -->
+            <div class="hotspot" style="left: 0%; top: 13%; width: 100%; height: 5%;" data-info="tabs">
+                <div class="popup" id="popup-tabs">
+                    <button class="popup-close" onclick="closePopup('tabs')">×</button>
+                    <div class="popup-title">Document Sections</div>
                     <div class="popup-content">
-                        This section contains the actual legal statute text defining the crime of breaking and entering at night, including penalties and provisions.
+                        Access different views of this statute:<br>
+                        • <strong>Document</strong> - Full text<br>
+                        • <strong>Notes of Decisions (132)</strong> - Related case law<br>
+                        • <strong>History</strong> - Amendment history<br>
+                        • <strong>Citing References</strong> - Cross-references<br>
+                        • <strong>Context & Analysis</strong> - Legal commentary
                     </div>
                 </div>
             </div>
 
-            <div class="hotspot" style="left: 5%; top: 65%; width: 90%; height: 15%;" data-info="credits">
+            <!-- Hotspot 4: Navigation Panel (Left Sidebar) -->
+            <div class="hotspot" style="left: 0%; top: 18%; width: 20%; height: 35%;" data-info="sidebar">
+                <div class="popup" id="popup-sidebar">
+                    <button class="popup-close" onclick="closePopup('sidebar')">×</button>
+                    <div class="popup-title">Document Navigation</div>
+                    <div class="popup-content">
+                        The left sidebar shows the document structure:<br><br>
+                        • Part hierarchy<br>
+                        • Chapters and sections<br>
+                        • Quick links to related statutes and provisions<br>
+                        • Table of Contents access
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hotspot 5: Main Content - Statute Text -->
+            <div class="hotspot" style="left: 20%; top: 30%; width: 75%; height: 35%;" data-info="statute">
+                <div class="popup" id="popup-statute">
+                    <button class="popup-close" onclick="closePopup('statute')">×</button>
+                    <div class="popup-title">Statute Text - Breaking and Entering at Night</div>
+                    <div class="popup-content">
+                        <strong>Key Definition:</strong> Whoever, in the night time, breaks and enters a building, ship, vessel or vehicle, with intent to commit a felony, or who attempts to or does break, burn, blow up or otherwise injures or destroys a safe, vault or other depository of money, bonds or other valuables in any building, vehicle or place, with intent to commit a larceny or felony, shall be punished by imprisonment in the state prison for not more than twenty years or in a jail or house of correction for not more than two and one-half years.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hotspot 6: Currentness Section -->
+            <div class="hotspot" style="left: 20%; top: 27%; width: 75%; height: 2.5%;" data-info="currentness">
+                <div class="popup" id="popup-currentness">
+                    <button class="popup-close" onclick="closePopup('currentness')">×</button>
+                    <div class="popup-title">Legal Status - Currentness</div>
+                    <div class="popup-content">
+                        This statute's current status and effective date. The "Currentness" section indicates when this law was last updated and its current applicability.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hotspot 7: Credits Section -->
+            <div class="hotspot" style="left: 20%; top: 65%; width: 75%; height: 6%;" data-info="credits">
                 <div class="popup" id="popup-credits">
                     <button class="popup-close" onclick="closePopup('credits')">×</button>
-                    <div class="popup-title">Credits Section</div>
+                    <div class="popup-title">Amendment History & Credits</div>
                     <div class="popup-content">
-                        Information about amendments and historical changes to the statute, including dates and statute numbers of previous amendments.
+                        <strong>Historical Amendments:</strong><br>
+                        St.1943, c. 343, § 1<br>
+                        St.1974, c. 462, § 2<br>
+                        St.1985, c. 312, § 1<br><br>
+                        This section documents all statutory amendments with dates and statute numbers.
                     </div>
                 </div>
             </div>
 
-            <div class="hotspot" style="left: 5%; top: 82%; width: 90%; height: 10%;" data-info="notes">
+            <!-- Hotspot 8: Notes of Decisions -->
+            <div class="hotspot" style="left: 20%; top: 71%; width: 75%; height: 15%;" data-info="notes">
                 <div class="popup" id="popup-notes">
                     <button class="popup-close" onclick="closePopup('notes')">×</button>
-                    <div class="popup-title">Notes of Decisions</div>
+                    <div class="popup-title">Notes of Decisions (132 cases)</div>
                     <div class="popup-content">
-                        References to 132 related court decisions and case law that interpret or apply this statute.
+                        <strong>Judicial Interpretations:</strong><br>
+                        This section provides summaries of 132 court decisions that have interpreted and applied this statute. Click to view specific cases and legal precedents.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hotspot 9: Currency Notice -->
+            <div class="hotspot" style="left: 20%; top: 86%; width: 75%; height: 8%;" data-info="currency">
+                <div class="popup" id="popup-currency">
+                    <button class="popup-close" onclick="closePopup('currency')">×</button>
+                    <div class="popup-title">Currency Information</div>
+                    <div class="popup-content">
+                        <strong>M.G.L.A. 266 § 16, MA ST 266 § 16</strong><br><br>
+                        Current through Chapter 79 of the 2026 2nd Annual Session. Some sections may be more current—see credits for details.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hotspot 10: Footer -->
+            <div class="hotspot" style="left: 0%; top: 94%; width: 100%; height: 6%;" data-info="footer">
+                <div class="popup" id="popup-footer">
+                    <button class="popup-close" onclick="closePopup('footer')">×</button>
+                    <div class="popup-title">Copyright & Attribution</div>
+                    <div class="popup-content">
+                        © 2026 Thomson Reuters. No claim to original U.S. Government Works. This material is sourced from official government legal documents and provided through Thomson Reuters Westlaw.
                     </div>
                 </div>
             </div>
@@ -230,9 +305,8 @@
         // Get all hotspots
         const hotspots = document.querySelectorAll('.hotspot');
 
-        // Add click and hover listeners to hotspots
+        // Add click listeners to hotspots
         hotspots.forEach(hotspot => {
-            // Click event
             hotspot.addEventListener('click', function(e) {
                 e.stopPropagation();
                 const infoId = this.dataset.info;
@@ -247,22 +321,6 @@
                 // Position popup near hotspot
                 positionPopup(popup, this);
             });
-
-            // Hover events (optional - uncomment to enable hover-based popups)
-            /*
-            hotspot.addEventListener('mouseenter', function() {
-                const infoId = this.dataset.info;
-                const popup = document.getElementById(`popup-${infoId}`);
-                popup.classList.add('active');
-                positionPopup(popup, this);
-            });
-
-            hotspot.addEventListener('mouseleave', function() {
-                const infoId = this.dataset.info;
-                const popup = document.getElementById(`popup-${infoId}`);
-                popup.classList.remove('active');
-            });
-            */
         });
 
         // Close popups when clicking outside
