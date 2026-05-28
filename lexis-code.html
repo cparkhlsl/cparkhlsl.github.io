@@ -164,28 +164,28 @@
              direction if the preferred one would go off-screen.
              ================================================================ -->
 
-        <!-- 1 · Notes of Decisions -->
+        <!-- 1 · Notes to Decisions -->
         <div class="hotspot"
-             style="left:5%; top:15%; width:11.3%; height:2%;"
-             data-info="NOD"
+             style="left:6%; top:14%; width:11.3%; height:1%;"
+             data-info="NTD"
              data-popup-position="bottom"></div>
 
         <!-- 2 · History -->
         <div class="hotspot"
-             style="left:24%; top:12%; width:7%; height:4%;"
+             style="left:45%; top:5%; width:4%; height:1%;"
              data-info="history"
              data-popup-position="bottom"></div>
 
-        <!-- 3 · Citing References -->
+        <!-- 3 · Citing Decisions -->
         <div class="hotspot"
              style="left:31.3%; top:12%; width:11.7%; height:4%;"
-             data-info="CR"
+             data-info="CD"
              data-popup-position="bottom"></div>
 
-        <!-- 4 · Context & Analysis -->
+        <!-- 4 · Other Citing Sources -->
         <div class="hotspot"
              style="left:43.5%; top:12%; width:11.7%; height:4%;"
-             data-info="context"
+             data-info="OCS"
              data-popup-position="bottom"></div>
 
         <!-- 5 · Table of Contents -->
@@ -218,11 +218,11 @@
              exactly what positionPopup() calculates.
              ================================================================ -->
 
-        <div class="popup" id="popup-NOD">
-            <button class="popup-close" onclick="closePopup('NOD')">×</button>
-            <div class="popup-title">Notes of Decisions</div>
+        <div class="popup" id="popup-NTD">
+            <button class="popup-close" onclick="closePopup('NTD')">×</button>
+            <div class="popup-title">Notes to Decisions</div>
             <div class="popup-content">
-                The Notes of Decisions is a curated list of cases that interpret the
+                The Notes to Decisions is a curated list of cases that interpret the
                 statute's language, organized by important sub-issues related to the statute.
             </div>
         </div>
@@ -236,22 +236,19 @@
             </div>
         </div>
 
-        <div class="popup" id="popup-CR">
-            <button class="popup-close" onclick="closePopup('CR')">×</button>
-            <div class="popup-title">Citing References</div>
+        <div class="popup" id="popup-CD">
+            <button class="popup-close" onclick="closePopup('CD')">×</button>
+            <div class="popup-title">Citing Decisions</div>
             <div class="popup-content">
-                The Citing References tab lists all sources available in Westlaw,
-                including cases, secondary sources, and more, that cite the statute.
+                The Citing Decisions lists all the cases that cite the statute available in Lexis.
             </div>
         </div>
 
-        <div class="popup" id="popup-context">
-            <button class="popup-close" onclick="closePopup('context')">×</button>
-            <div class="popup-title">Context &amp; Analysis</div>
+        <div class="popup" id="popup-OCS">
+            <button class="popup-close" onclick="closePopup('OCS')">×</button>
+            <div class="popup-title">Other Citing Sources</div>
             <div class="popup-content">
-                The Context &amp; Analysis tab is a curated list of non-case sources that
-                may be helpful for gaining context on the statute, including cross-references
-                to related statutes and secondary sources.
+                Other Citing Sources lists all the non-case sources that cite the statute in Lexis.
             </div>
         </div>
 
@@ -278,8 +275,8 @@
             <button class="popup-close" onclick="closePopup('currentness')">×</button>
             <div class="popup-title">Currentness</div>
             <div class="popup-content">
-                Currentness tells researchers when Westlaw last updated any changes to the
-                statute made by the legislature; typically, Westlaw updates regularly and
+                Currentness tells researchers when Lexis last updated any changes to the
+                statute made by the legislature; typically, Lexis updates regularly and
                 is current within a week.
             </div>
         </div>
