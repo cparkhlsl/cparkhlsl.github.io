@@ -1,1 +1,156 @@
+<div class="image-container" id="imageContainer">
+        <img src="Anatomy of Code (WL).png" alt="Thomson Reuters Westlaw Legal Document">
+        
+        <!-- Hotspot 1: Notes of Decisions Section -->
+        <div class="hotspot" style="left: 11.8%; top: 12%; width: 11.3%; height: 4%;" data-info="NOD">
+            <div class="popup" id="popup-NOD">
+                <button class="popup-close" onclick="closePopup('header')">×</button>
+                <div class="popup-title">Notes of Decisions</div>
+                <div class="popup-content">
+                    The Notes of Decisions is a curated list of cases that interpret the statute's language, organized by important sub-issues related to the statute.
+                </div>
+            </div>
+        </div>
 
+        <!-- Hotspot 2: History-->
+        <div class="hotspot" style="left: 24%; top: 12%; width: 7%; height: 4%;" data-info="history">
+            <div class="popup" id="popup-history">
+                <button class="popup-close" onclick="closePopup('history')">×</button>
+                <div class="popup-title">History</div>
+                <div class="popup-content">
+                     The History tab includes information on earlier version of the statute, including summaries of changes made by amendments to the statute.
+                </div>
+            </div>
+        </div>
+
+        <!-- Hotspot 3: Citing References -->
+        <div class="hotspot" style="left: 31.3%; top: 12%; width: 11.7%; height: 4%;" data-info="CR">
+            <div class="popup" id="popup-CR">
+                <button class="popup-close" onclick="closePopup('CR')">×</button>
+                <div class="popup-title">Citing References</div>
+                <div class="popup-content">
+                    The Citing References tab lists all sources available in Westlaw, including cases, secondary sources, and more, that cite the statute.
+                </div>
+            </div>
+        </div>
+
+        <!-- Hotspot 4: Context & Analysis -->
+        <div class="hotspot" style="left: 43.5%; top: 12%; width: 11.7%; height: 4%;" data-info="context">
+            <div class="popup" id="popup-context">
+                <button class="popup-close" onclick="closePopup('context')">×</button>
+                <div class="popup-title">Context & Analysis</div>
+                <div class="popup-content">
+                   The Context & Analysis tab is a curated list of non-case sources that may be helpful for gaining helpful context on the statute, including cross-references to related statutes and secondary sources.
+                </div>
+            </div>
+        </div>
+
+        <!-- Hotspot 5: Table of Contents -->
+        <div class="hotspot" style="left: 5.3%; top: 16.1%; width: 7.8%; height: 3.6%;" data-info="TOC">
+            <div class="popup" id="popup-TOC">
+                <button class="popup-close" onclick="closePopup('TOC')">×</button>
+                <div class="popup-title">Table of Contents</div>
+                <div class="popup-content">
+                    The Table of Contents allows researchers to see the surrounding statutes that may be relevant to their research problem.                   
+                </div>    
+            </div>
+        </div>
+
+        <!-- Hotspot 6: Caption or Heading -->
+        <div class="hotspot" style="left: 7%; top: 23%; width: 40%; height: 13%;" data-info="caption">
+            <div class="popup" id="popup-caption">
+                <button class="popup-close" onclick="closePopup('caption')">×</button>
+                <div class="popup-title">Caption or Heading</div>
+                <div class="popup-content">
+                    The Caption or Heading tells researchers where they're located in the code (Title, Subtitle, Chapter, and Individual Section) so they can assess that they're in the appropriate place for their research issue.                 
+                </div>    
+            </div>
+        </div>
+
+        <!-- Hotspot 7: Currentness -->
+        <div class="hotspot" style="left: 44.6%; top: 44%; width: 8%; height: 4%;" data-info="currentness">
+            <div class="popup" id="popup-currentness">
+                <button class="popup-close" onclick="closePopup('currentness')">×</button>
+                <div class="popup-title">Currentness</div>
+                <div class="popup-content">
+                     Currentness tells researchers when Westlaw last updated any changes to the statute made by the legislature; typically, Westlaw updates regularly, and is typically current within a week.                
+                </div>    
+            </div>
+        </div>
+
+          <!-- Hotspot 8: Statutory History Line -->
+        <div class="hotspot" style="left: 8%; top: 62.5%; width: 37%; height: 10%;" data-info="credits">
+            <div class="popup" id="popup-credits">
+                <button class="popup-close" onclick="closePopup('credits')">×</button>
+                <div class="popup-title">Statutory History Line</div>
+                <div class="popup-content">
+                     The Statutory History Line lets researchers know when the statute was originally enacted and whether it's ever been amended.                
+                </div>    
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Get all hotspots
+    const hotspots = document.querySelectorAll('.hotspot');
+
+    // Add click listeners to hotspots
+    hotspots.forEach(hotspot => {
+        hotspot.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const infoId = this.dataset.info;
+            const popup = document.getElementById(`popup-${infoId}`);
+            
+            // Close other popups
+            document.querySelectorAll('.popup.active').forEach(p => p.classList.remove('active'));
+            
+            // Open this popup
+            popup.classList.add('active');
+            
+            // Position popup near hotspot
+            positionPopup(popup, this);
+        });
+    });
+
+    // Close popups when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.hotspot') && !e.target.closest('.popup')) {
+            document.querySelectorAll('.popup.active').forEach(p => p.classList.remove('active'));
+        }
+    });
+
+    // Function to close popup
+    function closePopup(id) {
+        const popup = document.getElementById(`popup-${id}`);
+        if (popup) {
+            popup.classList.remove('active');
+        }
+    }
+
+    // Function to position popup
+    function positionPopup(popup, hotspot) {
+        const rect = hotspot.getBoundingClientRect();
+        const containerRect = document.getElementById('imageContainer').getBoundingClientRect();
+
+        // Try to position to the right of the hotspot
+        let left = rect.right - containerRect.left + 10;
+        let top = rect.top - containerRect.top;
+
+        // Adjust if popup would go off-screen
+        if (left + popup.offsetWidth > containerRect.width) {
+            left = rect.left - containerRect.left - popup.offsetWidth - 10;
+        }
+
+        if (top + popup.offsetHeight > containerRect.height) {
+            top = rect.bottom - containerRect.top - popup.offsetHeight;
+        }
+
+        if (top < 0) {
+            top = rect.top - containerRect.top;
+        }
+
+        popup.style.left = left + 'px';
+        popup.style.top = top + 'px';
+    }
+</script>
