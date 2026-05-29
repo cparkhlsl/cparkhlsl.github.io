@@ -12,7 +12,8 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+                         Ubuntu, Cantarell, sans-serif;
             background-color: #f5f5f5;
             padding: 20px;
         }
@@ -32,14 +33,9 @@
             font-size: 28px;
         }
 
-        .subtitle {
-            color: #666;
-            margin-bottom: 30px;
-            font-size: 14px;
-        }
-
+        /* ── image wrapper ────────────────────────────────────────────────── */
         .image-container {
-            position: relative;
+            position: relative;   /* ← popups are positioned relative to this */
             display: inline-block;
             margin: 20px 0;
             max-width: 100%;
@@ -53,6 +49,7 @@
             border-radius: 4px;
         }
 
+        /* ── hotspots ─────────────────────────────────────────────────────── */
         .hotspot {
             position: absolute;
             cursor: pointer;
@@ -66,6 +63,12 @@
             border-width: 4px;
         }
 
+        /* ── popups ───────────────────────────────────────────────────────── */
+        /*
+            Popups are now SIBLINGS of the hotspots (direct children of
+            .image-container), so `position: absolute` is relative to the
+            image container — exactly what positionPopup() calculates.
+        */
         .popup {
             position: absolute;
             background-color: white;
@@ -116,16 +119,11 @@
         }
 
         @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.95); }
+            to   { opacity: 1; transform: scale(1);    }
         }
 
+        /* ── instructions box ─────────────────────────────────────────────── */
         .instructions {
             background-color: #f0f7ff;
             border-left: 4px solid #0066cc;
@@ -141,186 +139,281 @@
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-
-            .popup {
-                min-width: 200px;
-                max-width: 280px;
-                font-size: 13px;
-            }
-
-            .hotspot {
-                border-width: 2px;
-            }
+            .container { padding: 15px; }
+            .popup     { min-width: 200px; max-width: 280px; font-size: 13px; }
+            .hotspot   { border-width: 2px; }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Anatomy of Code on Westlaw</h1>
+        
         <div class="instructions">
             <h3>How to use:</h3>
             <p>Click or hover over the red rectangles to view information about each annotated feature.<br><br>
-            Click <a href="/Anatomy of Code (WL).pdf" download>here</a> to download a .pdf version. </p>
+            Click <a href="/Anatomy of Code (WL).pdf" download>here</a> to download a .pdf version. 
+            
+            </p>
         </div>
 
         <div class="image-container" id="imageContainer">
             <img src="Anatomy of Code (WL).png" alt="Thomson Reuters Westlaw Legal Document">
+
+             <!-- ================================================================
+             HOTSPOTS
+             Change data-popup-position to: "right" | "left" | "top" | "bottom"
+             The popup will automatically fall back to the best available
+             direction if the preferred one would go off-screen.
+             ================================================================ -->
+
+            <!-- 1 · Notes of Decisions -->
+            <div class="hotspot" 
+                style="left:11.8%; top:12%; width:11.3%; height:4%;" 
+                data-info="NOD"
+                data-popup-position="bottom"></div>
+
+            <!-- 2 · History -->
+            <div class="hotspot" 
+                style="left:24%; top:12%; width:7%; height:4%;" 
+                data-info="history"
+                data-popup-position="bottom"></div>
+
+            <!-- 3 · Citing References -->
+            <div class="hotspot" 
+                style="left:31.3%; top:12%; width:11.7%; height:4%;" 
+                data-info="CR"
+                data-popup-position="bottom"></div>
+
+            <!-- 4 · Context & Analysis -->
+            <div class="hotspot" 
+                style="left:43.5%; top:12%; width:11.7%; height:4%;" 
+                data-info="context"
+                data-popup-position="bottom"></div>
+
+            <!-- 5 · Table of Contents -->
+            <div class="hotspot" 
+                style="left:5.3%; top:16.1%; width:7.8%; height:3.6%;" 
+                data-info="TOC"
+                data-popup-position="bottom"></div>
+
+            <!-- 6 · Caption or Heading  -->
+            <div class="hotspot" 
+                style="left:7%; top:23%; width:40%; height:13%;"
+                data-info="caption"
+                data-popup-position="right"></div>
+
+            <!-- 7 · Currentness -->
+            <div class="hotspot" 
+                style="left:44.6%; top:44%; width:8%; height:4%;" 
+                data-info="currentness"
+                data-popup-position="left"></div>
+
+            <!-- 8: Statutory History Line -->
+            <div class="hotspot" 
+                style="left:8%; top:62.5%; width:37%; height:10%;" 
+                data-info="credits"
+                data-popup-position="top"></div>
+
+            <!-- ================================================================
+             POPUPS — now siblings of hotspots, NOT children.
+             position:absolute here is relative to #imageContainer, which is
+             exactly what positionPopup() calculates.
+             ================================================================ -->
             
-            <!-- Hotspot 1: Notes of Decisions Section -->
-            <div class="hotspot" style="left: 11.8%; top: 12%; width: 11.3%; height: 4%;" data-info="NOD">
-                <div class="popup" id="popup-NOD">
-                    <button class="popup-close" onclick="closePopup('header')">×</button>
-                    <div class="popup-title">Notes of Decisions</div>
-                    <div class="popup-content">
-                        The Notes of Decisions is a curated list of cases that interpret the statute's language, organized by important sub-issues related to the statute.
-                    </div>
+            <div class="popup" id="popup-NOD">
+                <button class="popup-close" onclick="closePopup('NOD')">×</button>
+                <div class="popup-title">Notes of Decisions</div>
+                <div class="popup-content">
+                    The Notes of Decisions is a curated list of cases that interpret the 
+                    statute's language, organized by important sub-issues related to the statute.
                 </div>
             </div>
 
-            <!-- Hotspot 2: History-->
-            <div class="hotspot" style="left: 24%; top: 12%; width: 7%; height: 4%;" data-info="history">
-                <div class="popup" id="popup-history">
-                    <button class="popup-close" onclick="closePopup('history')">×</button>
-                    <div class="popup-title">History</div>
-                    <div class="popup-content">
-                         The History tab includes information on earlier version of the statute, including summaries of changes made by amendments to the statute.
-                    </div>
+            <div class="popup" id="popup-history">
+                <button class="popup-close" onclick="closePopup('history')">×</button>
+                <div class="popup-title">History</div>
+                <div class="popup-content">
+                    The History tab includes information on earlier version of the statute, 
+                    including summaries of changes made by amendments to the statute.
                 </div>
             </div>
 
-            <!-- Hotspot 3: Citing References -->
-            <div class="hotspot" style="left: 31.3%; top: 12%; width: 11.7%; height: 4%;" data-info="CR">
-                <div class="popup" id="popup-CR">
-                    <button class="popup-close" onclick="closePopup('CR')">×</button>
-                    <div class="popup-title">Citing References</div>
-                    <div class="popup-content">
-                        The Citing References tab lists all sources available in Westlaw, including cases, secondary sources, and more, that cite the statute.
-                    </div>
+            <div class="popup" id="popup-CR">
+                <button class="popup-close" onclick="closePopup('CR')">×</button>
+                <div class="popup-title">Citing References</div>
+                <div class="popup-content">
+                    The Citing References tab lists all sources available in Westlaw, 
+                    including cases, secondary sources, and more, that cite the statute.
+                </div>
+            </div>
+            
+            <div class="popup" id="popup-context">
+                <button class="popup-close" onclick="closePopup('context')">×</button>
+                <div class="popup-title">Context & Analysis</div>
+                <div class="popup-content">
+                    The Context & Analysis tab is a curated list of non-case sources that may be 
+                    helpful for gaining helpful context on the statute, including cross-references to related statutes and secondary sources.
                 </div>
             </div>
 
-            <!-- Hotspot 4: Context & Analysis -->
-            <div class="hotspot" style="left: 43.5%; top: 12%; width: 11.7%; height: 4%;" data-info="context">
-                <div class="popup" id="popup-context">
-                    <button class="popup-close" onclick="closePopup('context')">×</button>
-                    <div class="popup-title">Context & Analysis</div>
-                    <div class="popup-content">
-                       The Context & Analysis tab is a curated list of non-case sources that may be helpful for gaining helpful context on the statute, including cross-references to related statutes and secondary sources.
-                    </div>
-                </div>
+            <div class="popup" id="popup-TOC">
+                <button class="popup-close" onclick="closePopup('TOC')">×</button>
+                <div class="popup-title">Table of Contents</div>
+                <div class="popup-content">
+                    The Table of Contents allows researchers to see the surrounding statutes that may be relevant to their research problem.                   
+                </div>    
             </div>
 
-            <!-- Hotspot 5: Table of Contents -->
-            <div class="hotspot" style="left: 5.3%; top: 16.1%; width: 7.8%; height: 3.6%;" data-info="TOC">
-                <div class="popup" id="popup-TOC">
-                    <button class="popup-close" onclick="closePopup('TOC')">×</button>
-                    <div class="popup-title">Table of Contents</div>
-                    <div class="popup-content">
-                        The Table of Contents allows researchers to see the surrounding statutes that may be relevant to their research problem.                   
-                    </div>    
-                </div>
+            <div class="popup" id="popup-caption">
+                <button class="popup-close" onclick="closePopup('caption')">×</button>
+                <div class="popup-title">Caption or Heading</div>
+                <div class="popup-content">
+                    The Caption or Heading tells researchers where they're located in the code (Title, Subtitle, Chapter, and Individual Section) 
+                    so they can assess that they're in the appropriate place for their research issue.                 
+                </div>    
             </div>
 
-            <!-- Hotspot 6: Caption or Heading -->
-            <div class="hotspot" style="left: 7%; top: 23%; width: 40%; height: 13%;" data-info="caption">
-                <div class="popup" id="popup-caption">
-                    <button class="popup-close" onclick="closePopup('caption')">×</button>
-                    <div class="popup-title">Caption or Heading</div>
-                    <div class="popup-content">
-                        The Caption or Heading tells researchers where they're located in the code (Title, Subtitle, Chapter, and Individual Section) so they can assess that they're in the appropriate place for their research issue.                 
-                    </div>    
-                </div>
+            <div class="popup" id="popup-currentness">
+                <button class="popup-close" onclick="closePopup('currentness')">×</button>
+                <div class="popup-title">Currentness</div>
+                <div class="popup-content">
+                    Currentness tells researchers when Westlaw last updated any changes to the statute made by the legislature; 
+                    typically, Westlaw updates regularly, and is typically current within a week.                
+                </div>    
             </div>
 
-            <!-- Hotspot 7: Currentness -->
-            <div class="hotspot" style="left: 44.6%; top: 44%; width: 8%; height: 4%;" data-info="currentness">
-                <div class="popup" id="popup-currentness">
-                    <button class="popup-close" onclick="closePopup('currentness')">×</button>
-                    <div class="popup-title">Currentness</div>
-                    <div class="popup-content">
-                         Currentness tells researchers when Westlaw last updated any changes to the statute made by the legislature; typically, Westlaw updates regularly, and is typically current within a week.                
-                    </div>    
-                </div>
+            <div class="popup" id="popup-credits">
+                <button class="popup-close" onclick="closePopup('credits')">×</button>
+                <div class="popup-title">Statutory History Line</div>
+                <div class="popup-content">
+                    The Statutory History Line lets researchers know when the statute was originally enacted and whether it's ever been amended.                
+                </div>    
             </div>
+            
+        </div><!-- /#imageContainer -->
+    </div><!-- /.container -->
 
-              <!-- Hotspot 8: Statutory History Line -->
-            <div class="hotspot" style="left: 8%; top: 62.5%; width: 37%; height: 10%;" data-info="credits">
-                <div class="popup" id="popup-credits">
-                    <button class="popup-close" onclick="closePopup('credits')">×</button>
-                    <div class="popup-title">Statutory History Line</div>
-                    <div class="popup-content">
-                         The Statutory History Line lets researchers know when the statute was originally enacted and whether it's ever been amended.                
-                    </div>    
-                </div>
-            </div>
-        </div>
-    </div>
+   <script>
+    const GAP = 10; // px gap between hotspot edge and popup
 
-    <script>
-        // Get all hotspots
-        const hotspots = document.querySelectorAll('.hotspot');
+    /**
+     * Returns {left, top} relative to the image container for the given side,
+     * or null if the popup would overflow on that side.
+     */
+    function calcPosition(side, hotRect, conRect, popW, popH) {
+        // hotspot edges relative to the container's top-left corner
+        const hLeft   = hotRect.left   - conRect.left;
+        const hTop    = hotRect.top    - conRect.top;
+        const hRight  = hotRect.right  - conRect.left;
+        const hBottom = hotRect.bottom - conRect.top;
+        const hMidX   = (hLeft  + hRight)  / 2;
+        const hMidY   = (hTop   + hBottom) / 2;
 
-        // Add click listeners to hotspots
-        hotspots.forEach(hotspot => {
-            hotspot.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const infoId = this.dataset.info;
-                const popup = document.getElementById(`popup-${infoId}`);
-                
-                // Close other popups
-                document.querySelectorAll('.popup.active').forEach(p => p.classList.remove('active'));
-                
-                // Open this popup
-                popup.classList.add('active');
-                
-                // Position popup near hotspot
-                positionPopup(popup, this);
-            });
-        });
+        let left, top;
 
-        // Close popups when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.hotspot') && !e.target.closest('.popup')) {
-                document.querySelectorAll('.popup.active').forEach(p => p.classList.remove('active'));
-            }
-        });
-
-        // Function to close popup
-        function closePopup(id) {
-            const popup = document.getElementById(`popup-${id}`);
-            if (popup) {
-                popup.classList.remove('active');
-            }
+        switch (side) {
+            case 'right':
+                left = hRight + GAP;
+                top  = hMidY  - popH / 2;
+                break;
+            case 'left':
+                left = hLeft  - GAP - popW;
+                top  = hMidY  - popH / 2;
+                break;
+            case 'bottom':
+                left = hMidX  - popW / 2;
+                top  = hBottom + GAP;
+                break;
+            case 'top':
+                left = hMidX  - popW / 2;
+                top  = hTop   - GAP - popH;
+                break;
+            default:
+                return null;
         }
 
-        // Function to position popup
-        function positionPopup(popup, hotspot) {
-            const rect = hotspot.getBoundingClientRect();
-            const containerRect = document.getElementById('imageContainer').getBoundingClientRect();
+        // Reject if the popup overflows in the primary direction
+        if (side === 'right'  && left + popW > conRect.width)  return null;
+        if (side === 'left'   && left < 0)                     return null;
+        if (side === 'bottom' && top  + popH > conRect.height) return null;
+        if (side === 'top'    && top  < 0)                     return null;
 
-            // Try to position to the right of the hotspot
-            let left = rect.right - containerRect.left + 10;
-            let top = rect.top - containerRect.top;
+        // Clamp on the secondary axis so the popup stays inside the container
+        left = Math.max(0, Math.min(left, conRect.width  - popW));
+        top  = Math.max(0, Math.min(top,  conRect.height - popH));
 
-            // Adjust if popup would go off-screen
-            if (left + popup.offsetWidth > containerRect.width) {
-                left = rect.left - containerRect.left - popup.offsetWidth - 10;
-            }
+        return { left, top };
+    }
 
-            if (top + popup.offsetHeight > containerRect.height) {
-                top = rect.bottom - containerRect.top - popup.offsetHeight;
-            }
+    /**
+     * Positions a popup next to its hotspot.
+     * Tries the preferred side first, then falls back through the other three.
+     *
+     * To change a popup's position, edit the hotspot's data-popup-position
+     * attribute: "right" | "left" | "top" | "bottom"
+     */
+    function positionPopup(popup, hotspot) {
+        const preferred = hotspot.dataset.popupPosition || 'right';
+        const order = [preferred, ...['right', 'left', 'bottom', 'top']
+                                        .filter(s => s !== preferred)];
 
-            if (top < 0) {
-                top = rect.top - containerRect.top;
-            }
+        const hotRect = hotspot.getBoundingClientRect();
+        const conRect = document.getElementById('imageContainer').getBoundingClientRect();
+        const popW    = popup.offsetWidth;
+        const popH    = popup.offsetHeight;
 
-            popup.style.left = left + 'px';
-            popup.style.top = top + 'px';
+        let pos = null;
+        for (const side of order) {
+            pos = calcPosition(side, hotRect, conRect, popW, popH);
+            if (pos) break;
         }
-    </script>
+
+        // Ultimate fallback: pin to the top-left of the container
+        if (!pos) pos = { left: 0, top: 0 };
+
+        popup.style.left = pos.left + 'px';
+        popup.style.top  = pos.top  + 'px';
+    }
+
+    // ── click: open popup ────────────────────────────────────────────────────
+    document.querySelectorAll('.hotspot').forEach(hotspot => {
+        hotspot.addEventListener('click', function (e) {
+            e.stopPropagation();
+            const popup = document.getElementById(`popup-${this.dataset.info}`);
+
+            // Close any currently open popup
+            document.querySelectorAll('.popup.active')
+                    .forEach(p => p.classList.remove('active'));
+
+            // Show and position this popup
+            popup.classList.add('active');
+            positionPopup(popup, this);
+        });
+    });
+
+    // ── click outside: close all popups ─────────────────────────────────────
+    document.addEventListener('click', function (e) {
+        if (!e.target.closest('.hotspot') && !e.target.closest('.popup')) {
+            document.querySelectorAll('.popup.active')
+                    .forEach(p => p.classList.remove('active'));
+        }
+    });
+
+    // ── close button ─────────────────────────────────────────────────────────
+    function closePopup(id) {
+        const popup = document.getElementById(`popup-${id}`);
+        if (popup) popup.classList.remove('active');
+    }
+
+    // ── reposition on resize ─────────────────────────────────────────────────
+    window.addEventListener('resize', function () {
+        document.querySelectorAll('.popup.active').forEach(popup => {
+            const id      = popup.id.replace('popup-', '');
+            const hotspot = document.querySelector(`[data-info="${id}"]`);
+            if (hotspot) positionPopup(popup, hotspot);
+        });
+    });
+</script>
 </body>
 </html>
